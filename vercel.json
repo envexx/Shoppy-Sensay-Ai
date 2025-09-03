@@ -3,13 +3,14 @@
   "builds": [
     {
       "src": "api/index.js",
-      "use": "@vercel/node",
-      "config": {
-        "maxDuration": 30
-      }
+      "use": "@vercel/node"
     }
   ],
   "routes": [
+    {
+      "src": "/api/(.*)",
+      "dest": "/api/index.js"
+    },
     {
       "src": "/(.*)",
       "dest": "/api/index.js"
@@ -17,7 +18,5 @@
   ],
   "env": {
     "NODE_ENV": "production"
-  },
-  "regions": ["sin1"],
-  "framework": null
+  }
 }
