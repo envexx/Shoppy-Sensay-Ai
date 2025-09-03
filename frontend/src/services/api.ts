@@ -1,4 +1,28 @@
-const API_BASE_URL = import.meta.env.VITE_API_BASE_URL || 'https://shoppy-sensay-ai-api.vercel.app/api';
+// Smart API URL detection with fallback
+const getApiBaseUrl = () => {
+  // Check if we're in development (localhost)
+  const isDevelopment = window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1';
+  
+  // If environment variable is set, use it
+  if (import.meta.env.VITE_API_BASE_URL) {
+    return import.meta.env.VITE_API_BASE_URL;
+  }
+  
+  // If in development, use localhost
+  if (isDevelopment) {
+    return 'http://localhost:3001/api';
+  }
+  
+  // Production fallback
+  return 'https://shoppy-sensay-ai-api.vercel.app/api';
+};
+
+const API_BASE_URL = getApiBaseUrl();
+
+// Debug logging
+console.log('🔗 API Base URL:', API_BASE_URL);
+console.log('🌍 Current hostname:', window.location.hostname);
+console.log('🔧 Environment:', import.meta.env.VITE_API_BASE_URL || 'Not set');
 
 interface AuthResponse {
   success: boolean;
