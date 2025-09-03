@@ -15,8 +15,8 @@
   
   <p>
     <strong>Live Demo:</strong> 
-    <a href="https://sensay-terbaru.vercel.app">Frontend</a> | 
-    <a href="https://sensay-terbaru.vercel.app/api/health">Backend API</a>
+    <a href="https://shoppy-sensay-ai.vercel.app">Frontend</a> | 
+    <a href="https://shoppy-sensay-ai-api.vercel.app">Backend API</a>
   </p>
 </div>
 
@@ -211,8 +211,8 @@ Before you begin, ensure you have the following installed:
 #### 1. Clone the Repository
 
 ```bash
-git clone https://github.com/your-username/sensay-shop.git
-cd sensay-shop
+git clone https://github.com/envexx/Shoppy-Sensay-Ai.git
+cd Shoppy-Sensay-Ai
 ```
 
 #### 2. Install Dependencies
@@ -322,7 +322,7 @@ setup.bat
 
 ### Base URL
 - **Development**: `http://localhost:3001/api`
-- **Production**: `https://sensay-terbaru.vercel.app/api`
+- **Production**: `https://shoppy-sensay-ai-api.vercel.app/api`
 
 ### Authentication Endpoints
 
@@ -523,7 +523,7 @@ The Sensay AI integration provides:
 ## 🏗️ Project Structure
 
 ```
-sensay-shop/
+Shoppy-Sensay-Ai/
 ├── 📁 api/                          # Vercel serverless functions
 │   ├── 📄 index.js                 # Main entry point
 │   └── 📄 routes.js                # API routes
@@ -620,8 +620,8 @@ We welcome contributions! Please follow these steps:
 
 ### 1. Fork the Repository
 ```bash
-git clone https://github.com/your-username/sensay-shop.git
-cd sensay-shop
+git clone https://github.com/envexx/Shoppy-Sensay-Ai.git
+cd Shoppy-Sensay-Ai
 ```
 
 ### 2. Create a Feature Branch
@@ -725,8 +725,8 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
     <strong>Built with ❤️ using React, Node.js, and Sensay AI</strong>
   </p>
   <p>
-    <a href="https://sensay-terbaru.vercel.app">Live Demo</a> •
-    <a href="https://github.com/your-username/sensay-shop/issues">Report Bug</a> •
-    <a href="https://github.com/your-username/sensay-shop/discussions">Request Feature</a>
+    <a href="https://shoppy-sensay-ai.vercel.app">Live Demo</a> •
+    <a href="https://github.com/envexx/Shoppy-Sensay-Ai/issues">Report Bug</a> •
+    <a href="https://github.com/envexx/Shoppy-Sensay-Ai/discussions">Request Feature</a>
   </p>
 </div>
