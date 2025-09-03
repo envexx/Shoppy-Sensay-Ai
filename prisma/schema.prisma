@@ -1,0 +1,128 @@
+
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id            String    @id @default(cuid())
+  email         String    @unique
+  username      String    @unique
+  password      String
+  sensayUserId  String?   @unique // Sensay API User ID
+  createdAt     DateTime  @default(now())
+  updatedAt     DateTime  @updatedAt
+  
+  // Relasi ke chat sessions
+  chatSessions  ChatSession[]
+  
+  // Relasi ke cart dan purchase history
+  cartItems     CartItem[]
+  purchases     PurchaseHistory[]
+  
+  @@map("users")
+}
+
+model ChatSession {
+  id          String      @id @default(cuid())
+  userId      String
+  user        User        @relation(fields: [userId], references: [id], onDelete: Cascade)
+  
+  // Sensay conversation tracking
+  conversationId String?  @unique // Sensay conversation UUID
+  
+  createdAt   DateTime    @default(now())
+  updatedAt   DateTime    @updatedAt
+  
+  // Relasi ke messages
+  messages    ChatMessage[]
+  
+  @@map("chat_sessions")
+}
+
+model ChatMessage {
+  id            String      @id @default(cuid())
+  sessionId     String
+  session       ChatSession @relation(fields: [sessionId], references: [id], onDelete: Cascade)
+  
+  role          String      // 'user' atau 'assistant'
+  content       String      @db.Text
+  link          String?     // Link yang terdeteksi dalam pesan
+  timestamp     DateTime    @default(now())
+  
+  // Sensay response metadata
+  sensayResponse Json?     // Store full Sensay response if needed
+  
+  // Shopify products data
+  shopifyProducts Json?    // Store Shopify products data for persistence
+  
+  @@map("chat_messages")
+}
+
+model ApiUsage {
+  id            String    @id @default(cuid())
+  userId        String
+  endpoint      String    // 'chat', 'create_user', etc.
+  requestData   Json?
+  responseData  Json?
+  success       Boolean   @default(true)
+  errorMessage  String?
+  timestamp     DateTime  @default(now())
+  
+  @@map("api_usage")
+}
+
+model CartItem {
+  id            String    @id @default(cuid())
+  userId        String
+  user          User      @relation(fields: [userId], references: [id], onDelete: Cascade)
+  
+  // Product information
+  productId     String    // ID produk dari eksternal (Shopify, dll)
+  productName   String    // Nama produk
+  description   String?   // Deskripsi singkat produk
+  price         Decimal   @db.Decimal(10, 2) // Harga per item
+  quantity      Int       @default(1) // Jumlah item
+  total         Decimal   @db.Decimal(10, 2) // Total harga (price * quantity)
+  
+  // Metadata
+  imageUrl      String?   // URL gambar produk
+  productUrl    String?   // URL produk asli
+  
+  createdAt     DateTime  @default(now())
+  updatedAt     DateTime  @updatedAt
+  
+  @@map("cart_items")
+}
+
+model PurchaseHistory {
+  id            String    @id @default(cuid())
+  userId        String
+  user          User      @relation(fields: [userId], references: [id], onDelete: Cascade)
+  
+  // Product information
+  productId     String    // ID produk dari eksternal
+  productName   String    // Nama produk
+  description   String?   // Deskripsi singkat produk
+  price         Decimal   @db.Decimal(10, 2) // Harga per item
+  quantity      Int       // Jumlah yang dibeli
+  total         Decimal   @db.Decimal(10, 2) // Total harga
+  
+  // Purchase metadata
+  imageUrl      String?   // URL gambar produk
+  productUrl    String?   // URL produk asli
+  purchaseDate  DateTime  @default(now()) // Tanggal pembelian
+  
+  // Order information
+  orderId       String?   // ID order jika ada
+  status        String    @default("completed") // Status pembelian
+  
+  @@map("purchase_history")
+}

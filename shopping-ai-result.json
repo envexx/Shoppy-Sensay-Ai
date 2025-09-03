@@ -1,0 +1,10 @@
+{
+  "userId": "user_1756762409139_l9ep5z2m0",
+  "replicaUuid": "58dd601a-f5d1-478d-a6a9-eca4a6d72396",
+  "replicaName": "Shoppy Sensay",
+  "createdAt": "2025-09-01T21:33:43.888Z",
+  "instructions": {
+    "usage": "Gunakan replicaUuid untuk chat dengan AI",
+    "example": "await completeAPI.chatWithReplica('58dd601a-f5d1-478d-a6a9-eca4a6d72396', 'user_1756762409139_l9ep5z2m0', 'Your message here');"
+  }
+}

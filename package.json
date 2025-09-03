@@ -1,0 +1,55 @@
+{
+  "name": "sensay-shopping-ai",
+  "version": "1.0.0",
+  "description": "Sensay AI Shopping Assistant Integration",
+  "main": "dist/index.js",
+  "scripts": {
+    "build": "tsc",
+    "start": "node dist/index.js",
+    "dev": "ts-node src/index.ts",
+    "server": "nodemon src/server/index.ts",
+    "vercel-build": "npm run build && cd frontend && npm run build",
+    "vercel-dev": "vercel dev",
+    "vercel-deploy": "vercel --prod",
+    "db:generate": "prisma generate",
+    "db:push": "prisma db push",
+    "db:studio": "prisma studio",
+    "setup-sdk": "npx @openapitools/openapi-generator-cli generate -i https://api.sensay.io/schema -g typescript-axios -o ./sensay-sdk",
+    "install-sdk": "cd sensay-sdk && npm install && npm run build && cd ..",
+    "setup": "npm run setup-sdk && npm run install-sdk && npm install ./sensay-sdk"
+  },
+  "keywords": [
+    "sensay",
+    "ai",
+    "shopping",
+    "assistant",
+    "replica"
+  ],
+  "author": "",
+  "license": "MIT",
+  "devDependencies": {
+    "@types/bcryptjs": "^2.4.6",
+    "@types/cors": "^2.8.17",
+    "@types/express": "^4.17.21",
+    "@types/jsonwebtoken": "^9.0.5",
+    "@types/node": "^20.0.0",
+    "@vercel/node": "^3.0.0",
+    "nodemon": "^3.0.2",
+    "ts-node": "^10.9.0",
+    "typescript": "^5.0.0"
+  },
+  "dependencies": {
+    "@openapitools/openapi-generator-cli": "^2.7.0",
+    "@prisma/client": "^5.7.0",
+    "@types/compression": "^1.8.1",
+    "axios": "^1.11.0",
+    "bcryptjs": "^2.4.3",
+    "compression": "^1.8.1",
+    "cors": "^2.8.5",
+    "dotenv": "^16.3.1",
+    "express": "^4.18.2",
+    "express-rate-limit": "^8.0.1",
+    "jsonwebtoken": "^9.0.2",
+    "prisma": "^5.7.0"
+  }
+}
